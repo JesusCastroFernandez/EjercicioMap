@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class EjercicioMap {
+
+    public static void main(String[] args) {
+        // Rellenar dos listas con veinte mascotas aleatorias
+        List<Mascota> lista1 = new ArrayList<>();
+        List<Mascota> lista2 = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            lista1.add(Utilidades.mascotaAleatoria());
+            lista2.add(Utilidades.mascotaAleatoria());
+        }
+        System.out.println("Lista 1:");
+        System.out.println(lista1);
+        System.out.println("Lista 2:");
+        System.out.println(lista2);
+
+        // Crear un Map con las coincidencias de nombres en las listas
+        Map<String, List<Integer>> mapa = new HashMap<>();
+        for (int i = 0; i < lista1.size(); i++) {
+            String nombre = lista1.get(i).getNombre();
+            if (nombre.equals(lista2.get(i).getNombre())) {
+                if (!mapa.containsKey(nombre)) {
+                    mapa.put(nombre, new ArrayList<>());
+                }
+                mapa.get(nombre).add(i);
+            }
+        }
+
+        // Mostrar el contenido del Map
+        System.out.println("Mapa:");
+        for (Map.Entry<String, List<Integer>> entry : mapa.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
